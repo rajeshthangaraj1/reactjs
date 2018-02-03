@@ -3,7 +3,7 @@ module.exports = {
 /* all path values */
      path: {
        baseUrl: 'http://localhost:3000/',
-       apiUrl: 'http://ccpl.ninjaos.com/api/',
+       apiUrl: 'http://smartandsimple.in/honeyflix/api/',
 	   apiUrlPro: 'http://ccpl.ninjaos.com/ninjapro/',
 	   tinThumpUrl: 'http://ccpl.ninjaos.com/timthumb.php?src='
       },

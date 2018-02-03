@@ -6,55 +6,32 @@
 	<title>Ninjalite - Ecommerce Web App</title>
   <!-- CSS and  JS include Files -->
 	<link rel="stylesheet" href="%PUBLIC_URL%/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/bootstrap-material-design.min.css"/>
-	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/ripples.min.css"/>
 	<link rel="stylesheet" href="%PUBLIC_URL%/css/font-awesome.min.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:300i,400,500,600,700,800" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:400,500,600,700" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/site.custom.css"/>
-	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/site.responsive.css"/>
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/content_slider.css"/>
+	<link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/jquery.bxslider.css"/>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Allerta" rel="stylesheet">
-	<link rel="stylesheet" href="%PUBLIC_URL%/css/carousel.css"/>
+	<link rel="stylesheet" href="%PUBLIC_URL%/css/custom.css"/>
 	
 	<!--  Need to include date and time picker include files here. -->
  </head>
    <body>
-      <div id="root"></div>
+      <div id="root" class="home_pg"></div>
 	  
 	  <!-- include footer js files -->
-	  <script src="%PUBLIC_URL%/js/jquery.min.js"></script>
+	  <script src="%PUBLIC_URL%/js/jquery-2.2.0.min.js"></script>
 	  <script src="%PUBLIC_URL%/js/bootstrap.min.js"></script>
-	  <script type="text/javascript" src="%PUBLIC_URL%/js/material.min.js"></script>
-	  <script type="text/javascript" src="%PUBLIC_URL%/js/moment-with-locales.min.js"></script>
-	 <script type="text/javascript" src="%PUBLIC_URL%/js/ripples.min.js"></script>
+	  <script type="text/javascript" src="%PUBLIC_URL%/js/jquery.bxslider.min.js"></script>
+	  <script type="text/javascript" src="%PUBLIC_URL%/js/jquery.mixitup.min.js"></script>
+	 <script type="text/javascript" src="%PUBLIC_URL%/js/custom_js.js"></script>
 	  
 <script type="text/javascript">
 
     
-    $(document).ready(function () {
- 
-        $.material.init();
-
-        // Floating menu function - 3rd page
-        $('#tigger-menu').click(function () {			
-            var dorp_menu_status = $('#dropdownMenu2').attr('aria-expanded');
-            if (dorp_menu_status == 'false') {
-                $('.desktop-container').prepend($('<div class="div-backdrop"></div>'));
-            } else {
-                $('.div-backdrop').remove();
-            }
-
-        });
-        // Floating menu function - 3rd page
-
-        // Home screen modal menu hide funciton
-      $('body').on('click', '#dine-in, #delivery, #takeaway', function () {
-	    $('#onload-screen').modal('toggle');
-	   }) 
-        // Home screen modal menu hide funciton
-    });
+   
 	
 	
 </script>

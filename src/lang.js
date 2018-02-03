@@ -44,9 +44,9 @@ dineInImageWhite : "/img/icons/dineIn_white.png",
  choose_delvery_date_error :"Please choose a delivery date and time.",
  
  /*all page meta tags */
- site_title: 'Chilliz India Gate',
- site_title_with_separator: ' | Chilliz India Gate ',
- home_meta_title:"Welcome to Chilliz India Gate ",
+ site_title: 'Honeyflix',
+ site_title_with_separator: ' | Honeyflix ',
+ home_meta_title:"Welcome to Honeyflix ",
  prodcuts_meta_title:"Products Details",
  scan_qr_code_page:"Book a Table",
  signin_meta_title:"User Signin",

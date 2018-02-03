@@ -26,8 +26,7 @@ import StripeCheckout from './StripeCheckout';
 import Orders from './Orders';
 import DeliveryDatePicker from './DeliveryDatePicker';
 import NotFound from './NotFound';
-//import createBrowserHistory from 'history/lib/createBrowserHistory';
-//let history = createBrowserHistory();
+
  ReactDOM.render((
    <Router history={hashHistory } >
      {/*  <Route path="*" component={App}>  </Route> */}
@@ -37,10 +36,10 @@ import NotFound from './NotFound';
 		 <Route path="/about-us" component={Aboutus} />
 		 <Route path="/privacy-policy" component={Privacy} />
          <Route path="/contact-us" component={Contactus} />
-         <Route path="/products/:categoryType/:categoryId"   component={Products}/>
+         <Route path="/products/:categoryId"   component={Products}/>
 		 <Route path="/product/:productSlug"   component={Productsdetails}/>
-		 <Route path="/cart" component={Cart} />
-		 <Route path="/add-on" component={Addons} />
+		 <Route path="/cart" component={Cart}/>
+		 <Route path="/add-on" component={Addons}/>
 		 <Route path="/sign-in"   component={Login}/>
 		 <Route path="/sign-up"   component={Signup}/>
 		 <Route path="/forgot-password"   component={Forgotpassword}/>
