@@ -12,21 +12,22 @@
     "react-cookie": "^1.0.4",
     "react-document-meta": "^2.1.1",
     "react-dom": "^15.4.2",
-    "react-router": "^3.0.2"
+    "react-router": "^3.0.2",
+    "react-scroll-to-element": "^0.2.0"
   },
   "reactToolbox": {
-  "include": [
-    "BUTTON",
-    "DATE_PICKER"
-  ],
-  "customProperties": {
-    "animation-duration": "0.3s",
-    "color-accent": "var(--palette-pink-a200)",
-    "color-accent-dark": "var(--palette-pink-700)",
-    "color-primary-contrast": "var(--color-dark-contrast)",
-    "color-accent-contrast": "var(--color-dark-contrast)"
-  },
-  "output": "public/react-toolbox"
+    "include": [
+      "BUTTON",
+      "DATE_PICKER"
+    ],
+    "customProperties": {
+      "animation-duration": "0.3s",
+      "color-accent": "var(--palette-pink-a200)",
+      "color-accent-dark": "var(--palette-pink-700)",
+      "color-primary-contrast": "var(--color-dark-contrast)",
+      "color-accent-contrast": "var(--color-dark-contrast)"
+    },
+    "output": "public/react-toolbox"
   },
   "scripts": {
     "start": "react-scripts start",

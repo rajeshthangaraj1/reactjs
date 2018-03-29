@@ -1,16 +1,13 @@
 /* global $, angular, React */
 import React from 'react';
-import axios from 'axios';
-import {  Link  } from 'react-router';
 import DocumentMeta from 'react-document-meta';
+import Scroll from 'react-scroll-to-element';
 /*import cookie from 'react-cookie';*/
 import './App.css';
-/*import getResult from './Api';*/
-/*const Loading = require('./loading');*/
-const config = require('./config');
+
 const lang = require('./lang');
-const APIURL = config.path.apiUrl; 
- 
+
+
  /* Load meta tags */
   const meta = {
       title: lang.home_meta_title,
@@ -30,361 +27,491 @@ class Home extends React.Component {
        super(props);
 	   /* Declare state */
 	   this.state = { categorylist: [],categoryclass:''};
-	   
+	 
 	   
    }
 
 	 componentWillMount() {
-		/* API CALL FOR Category*/
-		this.catgory_api();
 		
 		
-		this.handleChange = this.handleChange.bind(this);
+		
+		
 			
 			
 	 }
 	  componentDidMount() {
-		  alert(document.getElementById("filters"));
-		  var section = document.getElementById("category-listing");
-		  console.log(section);
-		  console.log(section.click());
+		
 	  }
-  /* catergory list get api*/
-   handleChange() 
-  {
-	  alert('1');
-	  var el = document.getElementById("chekcing");	
-	  el.click();
-	
-  }
-  
-  handleClicks(){
-	this.setState({categorylist: 'all'});
-	alert('ye');
-  }
-  catgory_api()
- {
-	 axios.get(APIURL+'products/category_list/')
-		 .then(res => {
-			 if(res.data.status === "ok"){				 
-				  this.setState({categorylist: res.data.result_set});
-			 }
-			 
-	  	});
+	  
+	  
+ check(e){
+    
+    var elmnt = e.currentTarget.dataset.id;
+    var elmnts = document.getElementById(elmnt);
+    elmnts.scrollIntoView(true);
+   
  }
 
+ 
 
-  /* listing navigation  items.. */
-  __category_listing(){	
-			
-			if(this.state.categorylist){ 
-			return this.state.categorylist.map((loaddata, index)=>
-			 <li key={index}>
-				<span className="filter" onChange={this.handleChange} data-filter={'.'+loaddata.slug} >{loaddata.name}</span>
-			 </li>
-			);
-		}
-}
-   /* listing navigation  items.. */
-  __category__product_list(){	
-			
-			if(this.state.categorylist){
-			return this.state.categorylist.map((loaddata, index)=>
-			
-			<li className={'portfolio all '+loaddata.slug} data-cat={loaddata.slug} key={index}> 
-							<div className="top_header">
-							<h2>{loaddata.name}</h2>
-							<div className="pull-right btn_right">							
-							<Link to={"/products/"+loaddata.slug} className="link_btn">View Details</Link>
-							</div>
-							</div>
-							<ul className="products_list">										
-							{this.__product_list(loaddata.products)}			
-							</ul>
-			</li>
-			
-			
-			);
-			
-		}
-}
-/* listing navigation  items.. */
-  __product_list(productlist){	
-			
-			return productlist.map((loaddata, index)=> 
-			                       <li className="product_detail col-lg-3 col-md-3 col-sm-6" key={index}>			
-									<div className="product_main">	
-										<figure>
-											<a href="#" className="img_cont">
-											<img src="images/car_img2.png" alt="" />
-											</a>
-										</figure>	
-										<section>
-											<h4><a href="inner.html">{loaddata.product_name}</a></h4>
-										<p>{loaddata.product_long_desc}</p>
-										<Link to={"/product/"+loaddata.product_slug} className="btn_orange">View Details</Link>
-											
-										</section>	
-										</div>
-									</li>	
-			);					
-}
+
+ 
+  
+
   render() {
    
     return (
 
 	<div>   	<DocumentMeta  {...meta} />
-	<header>
-       <div className="header_in">      
-           
-           <div className="header_middle">
-              <nav className="navbar navbar-default">
-                 <div className="container">          
-                     <div className="row">
-                        <div className="navbar-header col-xs-5 col-sm-5 col-md-4"> 
-                            <a className="navbar-brand logo" href="index.html"><img src="images/logo.png" alt="" /></a> 
-                         </div>
-                         <div className="hright_sec  col-xs-7 col-sm-7 col-md-8">
-                             <div className="htop_right">
-                                 <ul className="social_icons">
-                                     <li>
-                                         <a href="" title="Facebook"> <i className="fa fa-facebook"></i> </a>
-                                     </li>
-                                     <li>
-                                         <a href="" title="Instagram"><i className="fa fa-instagram"></i></a>
-                                     </li>
-									 <li>
-                                         <a href="" title="Twitter"><i className="fa fa-twitter"></i></a>
-                                     </li>
-                                 </ul>
-								 
-								 <div className="top_search_form" id="navigation_search">
-								<form>
-								<input type="text" name="search" placeholder="Search.."/>
-								<a href="#"><span className="fa fa-search"></span></a>
-								</form></div>
-								
-								<div id="mySidenav" className="sidenav">
-  <a href="#" className="closebtn"><img src="images/close-arrow.png"  alt=""/></a>
-  <a href="inner.html">About</a>
-  <a href="products.html">Product Details</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
-</div>
+	
+  <nav className="navbar navbar-default" role="navigation">
+    <div className="container">
+      <div className="navbar-header">
+        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span className="sr-only">Toggle nav</span>
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
+        </button>
 
-								
-	<div className="nav_bar_icon" id="menu_bar_open">
+      
+        <a className="navbar-brand" href="#">ECCS</a>
 
-<span>
-<strong>Menu</strong><i className="fa fa-bars"></i></span>
-							</div>
-      </div>  
-							
-                         </div>
+      </div>
+      <div className="navigation collapse navbar-collapse navbar-ex1-collapse">
+        <ul className="nav navbar-nav">
+          <li className="current"><a onClick={this.check.bind(this)} data-id="intro" >Home</a></li>
+          <li><a onClick={this.check.bind(this)} data-id="about" >About</a></li>
+          <li><a onClick={this.check.bind(this)} data-id="services"   >Service</a></li>
+          <li><a onClick={this.check.bind(this)} data-id="portfolio"  >Works</a></li>
+          <li><a onClick={this.check.bind(this)} data-id="team" >Team</a></li>
+          <li><a onClick={this.check.bind(this)} data-id="contact"  >Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+ 
+  <div id="intro">
+    <div className="intro-text">
+      <div className="container">
+        <div className="col-md-12">
+          <div id="rotator">
+            <h1><span className="1strotate">ECCS web studio, Design for life, Creativity and technology</span></h1>
+            <div className="line-spacer"></div>
+            <p><span className="2ndrotate">Web Design, Brand Identity, Promotion</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <section id="about" className="home-section bg-white">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-offset-2 col-md-8">
+          <div className="section-heading">
+            <h2>About us</h2>
+            <div className="heading-line"></div>
+            <p>We’ve been building unique digital products, platforms, and experiences for the past 6 years.</p>
+          </div>
+        </div>
+      </div>
+      <div className="row wow fadeInUp">
+        <div className="col-md-6 about-img">
+          <img src="img/about-img.jpg" alt=""/>
+        </div>
+
+        <div className="col-md-6 content">
+          <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elite storium paralate</h2>
+          <h3>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+          <p>
+            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Libero justo laoreet sit amet cursus sit amet dictum sit. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="parallax1" className="home-section parallax" data-stellar-background-ratio="0.5">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
+          <div className="color-light">
+            <h2 className="wow bounceInDown" data-wow-delay="0.5s">Details are the key for perfection</h2>
+            <p className="lead wow bounceInUp" data-wow-delay="1s">We mix all detailed things together</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section id="services" className="home-section bg-white">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-offset-2 col-md-8">
+          <div className="section-heading">
+            <h2>Services</h2>
+            <div className="heading-line"></div>
+            <p>We’ve been building unique digital products, platforms, and experiences for the past 6 years.</p>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <div id="carousel-service" className="service carousel slide">
+
+          
+            <div className="carousel-inner">
+              <div className="item active">
+                <div className="row">
+                  <div className="col-sm-12 col-md-offset-1 col-md-6">
+                    <div className="wow bounceInLeft">
+                      <h4>Website Design</h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
                     </div>
-                 </div>
-                                                        
-              </nav>
-           </div>
-   </div>
-</header>
- <div className="main_slider">
-	  <ul className="bxslider" >
-              <li className="content_slider_slide">
-                <div className="featured_img">
-                  <img src="images/banner.jpg"  alt=""/>
-                </div>
-                <div className="featured_img_overlay">
-                  <div className="slide_desktop slide_tablet slide_mobile">
-                    <table width="100%">
-                      <tbody>
-                        <tr>
-                          <td>
-                          
-						    <h2>Welcome To Honey flix </h2>
-				  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-				  Lorem Ipsum has been. </p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  </div>
+                  <div className="col-sm-12 col-md-5">
+                    <div className="screenshot wow bounceInRight">
+                      <img src="img/screenshots/1.png" className="img-responsive" alt="" />
+                    </div>
                   </div>
                 </div>
-              </li>
-              <li className="content_slider_slide">
-                <div className="featured_img">
-                  <img src="images/banner.jpg"  alt=""/>
-				                 </div>
-                <div className="featured_img_overlay">
-                  <div className="slide_desktop slide_tablet slide_mobile">
-                    <table width="100%">
-                      <tbody>
-                        <tr>
-                          <td>
-
-						    <h2>Welcome To Honey flix </h2>
-				  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-				  Lorem Ipsum has been. </p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+              </div>
+              <div className="item">
+                <div className="row">
+                  <div className="col-sm-12 col-md-offset-1 col-md-6">
+                    <div className="wow bounceInLeft">
+                      <h4>Brand Identity</h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                    </div>
+                  </div>
+                  <div className="col-sm-12 col-md-5">
+                    <div className="screenshot wow bounceInRight">
+                      <img src="img/screenshots/2.png" className="img-responsive" alt="" />
+                    </div>
                   </div>
                 </div>
-              </li>
-            </ul>
-</div>
+              </div>
+              <div className="item">
+                <div className="row">
+                  <div className="col-sm-12 col-md-offset-1 col-md-6">
+                    <div className="wow bounceInLeft">
+                      <h4>Web & Mobile Apps</h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                    </div>
+                  </div>
+                  <div className="col-sm-12 col-md-5">
+                    <div className="screenshot wow bounceInRight">
+                      <img src="img/screenshots/3.png" className="img-responsive" alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+            <ol className="carousel-indicators">
+              <li data-target="#carousel-service" data-slide-to="0" className="active"></li>
+              <li data-target="#carousel-service" data-slide-to="1"></li>
+              <li data-target="#carousel-service" data-slide-to="2"></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="portfolio" className="home-section bg-gray">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-offset-2 col-md-8">
+          <div className="section-heading">
+            <h2>Works</h2>
+            <div className="heading-line"></div>
+            <p>We’ve been building unique digital products, platforms, and experiences for the past 6 years.</p>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-lg-12">
+
+          <ul id="og-grid" className="og-grid">
+            <li>
+              <a href="#" data-largesrc="img/works/1.jpg" data-title="Portfolio title" data-description="Duo te dico volutpat, unum elit oblique per id. Ne duo mollis sapientem intellegebat. Per at augue vidisse percipit, pri vocibus assueverit interesset ut, no dolore luptatum incorrupte nec. In mentitum forensibus nec, nibh eripuit ut pri, tale illud voluptatum ut sea. Sed oratio repudiare ei, cum an magna labitur, eu atqui augue mei. Pri consul detracto eu, solet nusquam accusam ex vim, an movet interesset necessitatibus mea.">
+								<img src="img/works/thumbs/1.jpg" alt=""/>
+							</a>
+            </li>
+            <li>
+              <a href="#" data-largesrc="img/works/2.jpg" data-title="Portfolio title" data-description="Mea an eros periculis dignissim, quo mollis nostrum elaboraret et. Id quem perfecto mel, no etiam perfecto qui. No nisl legere recusabo nam, ius an tale pericula evertitur, dicat phaedrum qui in. Usu numquam legendos in, voluptaria sadipscing ut vel. Eu eum mandamus volutpat gubergren, eos ad detracto nominati, ne eum idque elitr aliquam.">
+								<img src="img/works/thumbs/2.jpg" alt=""/>
+							</a>
+            </li>
+            <li>
+              <a href="#" data-largesrc="img/works/3.jpg" data-title="Portfolio title" data-description="Vim ad persecuti appellantur. Eam ignota deterruisset eu, in omnis fierent convenire sed. Ne nulla veritus vel, liber euripidis in eos. Postea comprehensam vis in, detracto deseruisse mei ea. Ex sadipscing deterruisset concludaturque quo.">
+								<img src="img/works/thumbs/3.jpg" alt="img01"/>
+							</a>
+            </li>
+            <li>
+              <a href="#" data-largesrc="img/works/4.jpg" data-title="Portfolio title" data-description="In mentitum forensibus nec, nibh eripuit ut pri, tale illud voluptatum ut sea. Sed oratio repudiare ei, cum an magna labitur, eu atqui augue mei. Pri consul detracto eu, solet nusquam accusam ex vim, an movet interesset necessitatibus mea.">
+								<img src="img/works/thumbs/4.jpg" alt="img01"/>
+							</a>
+            </li>
+            <li>
+              <a href="#" data-largesrc="img/works/5.jpg" data-title="Portfolio title" data-description="Duo te dico volutpat, unum elit oblique per id. Ne duo mollis sapientem intellegebat. Per at augue vidisse percipit, pri vocibus assueverit interesset ut, no dolore luptatum incorrupte nec. In mentitum forensibus nec, nibh eripuit ut pri, tale illud voluptatum ut sea">
+								<img src="img/works/thumbs/5.jpg" alt="img01"/>
+							</a>
+            </li>
+            <li>
+              <a href="#" data-largesrc="img/works/6.jpg" data-title="Portfolio title" data-description="Id elit saepe pro. In atomorum constituam definitionem quo, at torquatos sadipscing eum, ut eum wisi meis mentitum. Probo feugiat ea duo. An usu platonem instructior, qui dolores inciderint ad. Te elit essent mea, vim ne atqui legimus invenire, ad dolor vitae sea.">
+								<img src="img/works/thumbs/6.jpg" alt="img01"/>
+							</a>
+            </li>
+            <li>
+              <a href="#" data-largesrc="img/works/7.jpg" data-title="Portfolio title" data-description="Duo te dico volutpat, unum elit oblique per id. Ne duo mollis sapientem intellegebat. Per at augue vidisse percipit, pri vocibus assueverit interesset ut, no dolore luptatum incorrupte nec. In mentitum forensibus nec, nibh eripuit ut pri, tale illud voluptatum ut sea. Sed oratio repudiare ei, cum an magna labitur, eu atqui augue mei.">
+								<img src="img/works/thumbs/7.jpg" alt="img01"/>
+							</a>
+            </li>
+            <li>
+              <a href="#" data-largesrc="img/works/8.jpg" data-title="Portfolio title" data-description="No nisl legere recusabo nam, ius an tale pericula evertitur, dicat phaedrum qui in. Usu numquam legendos in, voluptaria sadipscing ut vel. Eu eum mandamus volutpat gubergren, eos ad detracto nominati, ne eum idque elitr aliquam.">
+								<img src="img/works/thumbs/8.jpg" alt="img01"/>
+							</a>
+            </li>
+            <li>
+              <a href="#" data-largesrc="img/works/9.jpg" data-title="Portfolio title" data-description="Lorem ipsum dolor sit amet, ex pri quod ferri fastidii. Mazim philosophia eum ad, facilisis laboramus te est. Eam magna fabellas ut. Ne vis diceret accumsan salutandi, pro in impedit accusamus dissentias, ut nonumy eloquentiam ius.">
+								<img src="img/works/thumbs/9.jpg" alt="img01"/>
+							</a>
+            </li>
+            <li>
+              <a href="#" data-largesrc="img/works/10.jpg" data-title="Portfolio title" data-description="Duo te dico volutpat, unum elit oblique per id. Ne duo mollis sapientem intellegebat. Per at augue vidisse percipit, pri vocibus assueverit interesset ut, no dolore luptatum incorrupte nec. In mentitum forensibus nec, nibh eripuit ut pri, tale illud voluptatum ut sea. Sed oratio repudiare ei, cum an magna labitur, eu atqui augue mei. Pri consul detracto eu, solet nusquam accusam ex vim.">
+								<img src="img/works/thumbs/10.jpg" alt="img01"/>
+							</a>
+            </li>
+            <li>
+              <a href="#" data-largesrc="img/works/11.jpg" data-title="Portfolio title" data-description="Vim ad persecuti appellantur. Eam ignota deterruisset eu, in omnis fierent convenire sed. Ne nulla veritus vel, liber euripidis in eos. Postea comprehensam vis in, detracto deseruisse mei ea. Ex sadipscing deterruisset concludaturque quo.">
+								<img src="img/works/thumbs/11.jpg" alt="img01"/>
+							</a>
+            </li>
+            <li>
+              <a href="#" data-largesrc="img/works/12.jpg" data-title="Portfolio title" data-description="Mea an eros periculis dignissim, quo mollis nostrum elaboraret et. Id quem perfecto mel, no etiam perfecto qui. No nisl legere recusabo nam, ius an tale pericula evertitur, dicat phaedrum qui in. Usu numquam legendos in, voluptaria sadipscing ut vel. Eu eum mandamus volutpat gubergren, eos ad detracto nominati, ne eum idque elitr aliquam.">
+								<img src="img/works/thumbs/12.jpg" alt="img01"/>
+							</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="parallax2" className="home-section parallax" data-stellar-background-ratio="0.5">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
+          <ul className="clients">
+            <li className="wow fadeInDown" data-wow-delay="0.3s"><a href="#"><img src="img/clients/1.png" alt="" /></a></li>
+            <li className="wow fadeInDown" data-wow-delay="0.6s"><a href="#"><img src="img/clients/2.png" alt="" /></a></li>
+            <li className="wow fadeInDown" data-wow-delay="0.9s"><a href="#"><img src="img/clients/3.png" alt="" /></a></li>
+            <li className="wow fadeInDown" data-wow-delay="1.1s"><a href="#"><img src="img/clients/4.png" alt="" /></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
  
-<div className="products_home_main">
-<div className="main_filters">
-<div className="container">
- <ul id="filters" className="clearfix portfolio-sorting list-inline ">
-			<li id="category-listings" onClick={this.handleClicks} ><span id="category-listing" onClick={this.handleClicks} className="filter active category-listing" data-filter=".all">ALL</span></li>
-			{this.__category_listing()}
-		</ul>
-</div>
-</div>
-		
-<div className="container">
-	  <div className="row">
-<div className="prdouct_wrapper_main">			
-			<ul className="portfolio-items list-unstyled"  id="portfoliolist">
-			{this.__category__product_list()}					   
-			</ul>
-		</div>
-		</div>
-  </div>
-</div>
+  <section id="team" className="home-section bg-white">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-offset-2 col-md-8">
+          <div className="section-heading">
+            <h2>Our Team</h2>
+            <div className="heading-line"></div>
+            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+          <div className="box-team wow bounceInUp" data-wow-delay="0.1s">
+            <img src="img/team/1.jpg" alt="" className="img-circle img-responsive" />
+            <h4>Dominique Vroslav</h4>
+            <p>Art Director</p>
+          </div>
+        </div>
+        <div className="col-xs-12 col-sm-3 col-md-3 col-lg-3" data-wow-delay="0.3s">
+          <div className="box-team wow bounceInUp">
+            <img src="img/team/2.jpg" alt="" className="img-circle img-responsive" />
+            <h4>Thomas Jeffersonn</h4>
+            <p>Web Designer</p>
+          </div>
+        </div>
+        <div className="col-xs-12 col-sm-3 col-md-3 col-lg-3" data-wow-delay="0.5s">
+          <div className="box-team wow bounceInUp">
+            <img src="img/team/3.jpg" alt="" className="img-circle img-responsive" />
+            <h4>Nola Maurin</h4>
+            <p>Illustrator</p>
+          </div>
+        </div>
+        <div className="col-xs-12 col-sm-3 col-md-3 col-lg-3" data-wow-delay="0.7s">
+          <div className="box-team wow bounceInUp">
+            <img src="img/team/4.jpg" alt="" className="img-circle img-responsive" />
+            <h4>Mira Ladovic</h4>
+            <p>Typographer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-
-<div className="subscribe_section">
-<div className="container">
-<h3>Subscribe our newsletter to get the latest trends &amp; news</h3>
-<form>
-<input type="text" className="btn" placeholder="Name"/> 
-<input type="email" className="btn" placeholder="Email"/> 
-<button type="submit"  className="btn_orange  newsletter_submit btn submit_btn" value="Submit">Subscribe</button>
-</form>
-	</div>   
-</div>
-<div className="our_features">
-  <div className="container">
-    <ul className="our_features_list">
-	  <li>
-		 <img src="images/alarm_icon.png"  alt=""/>
-<h4><a href="#">Hassle-free replacement</a></h4>
-<p>It is a long established fact that a reader will be distracted by the readable content of a page when 
-looking at its layout.</p>
  
-	</li>
-	 <li> 
-	  <img src="images/secure.png"  alt=""/>
-<h4><a href="#">100% Secure Payments</a> </h4>
-<p>It is a long established fact that a reader will be distracted by the readable content of a page
- when looking at its layout.</p>
-	 </li>
-	  <li> 
-	  <img src="images/vast.png" alt=""/>
-<h4><a href="#">Vast Service Network</a></h4>
-<p>It is a long established fact that a reader will be distracted by the readable 
-content of a page when looking at its layout.
- </p>
-	 </li>
-	</ul>
-	
-  </div>
-</div>
+  <section id="contact" className="home-section bg-gray">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-offset-2 col-md-8">
+          <div className="section-heading">
+            <h2>Contact us</h2>
+            <div className="heading-line"></div>
+            <p>If you have any question or just want to say 'hello' to Alstar web studio please fill out form below and we will be get in touch with you within 24 hours. </p>
+          </div>
+        </div>
+      </div>
 
-<footer>
-		<div className="container">
-			<div className="foot-top">
-				<div className="quick-link foot-common fl">
-					<h5>Support</h5>			
-					<ul className="foot-menu">
-						<li><a href="#">Customer Service</a></li>
-						<li><a href="#">Shipping FAQ</a></li>
-						<li><a href="#">Service Centres</a></li>
-						<li><a href="#">Warranty</a></li>
-						<li><a href="#">Product Authentication</a></li>
-					
-					</ul>
-					
-				
-					</div>
-				<div className="top-location foot-common fl">
-				<h5>Shop And Learn</h5>			
-				<ul className="foot-menu">
-						<li><a href="#">Honeyflix</a></li>
-						<li><a href="#">About Products</a></li>
-						<li><a href="#">Products Details</a></li>
-						<li><a href="#">Honeyflix Cars</a></li>
-						<li><a href="#">Honeyflix Power Bank</a></li>
+      <div className="row">
+        <div className="col-md-offset-2 col-md-8">
+          <div id="sendmessage">Your message has been sent. Thank you!</div>
+          <div id="errormessage"></div>
 
-					</ul>
-				</div>
-				
-				<div className="top-location foot-common fl">
-				<h5>About Us</h5>			
-				<ul className="foot-menu">
-						<li><a href="#">Honeyflix</a></li>
-						<li><a href="#">Mediakit</a></li>
-						<li><a href="#">Culture</a></li>
-						<li><a href="#">Privacy Policy</a></li>
-	
-					</ul>
-				</div>
-				
-				
-				<div className="office-hour foot-common fl">
-					<h5>Contact Us</h5>			
-					<ul className="foot-menu">
-						<li><a href="#">Email</a></li>
-						<li><a href="#">Careers</a></li>
-						<li><a href="#">Contact US</a></li>
-					</ul>			
-				</div>
-					<div className="office-location foot-common fl">
-				<p className="phone number">1800 103 0000</p>
-				<p className="phone">Services Hours: 22/7 </p>
-			<div className="phone chat btn-large">Chat Support</div>
+          <form action="" method="post" className="form-horizontal contactForm" role="form">
+            <div className="col-md-offset-2 col-md-8">
+              <div className="form-group">
+                <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <div className="validation"></div>
+              </div>
+            </div>
 
-					</div>
-					
-			</div>
-			<div className="foot-middle">
-				
-				 <ul className="security-part fl">
-                     <li className="footer_logo"><span><a href="#">Honey Flix</a></span></li>
-					 <li className="footer_list">
-					 <ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Features</a></li>
-						<li><a href="#">Reviews</a></li>
-						<li><a href="#">Download</a></li>
-		
-					</ul>
-						</li>
-						<li className="footer_social">
-						 <ul className="foot-social fr">
-                           <li><a href="#"><i className="fa fa-facebook" aria-hidden="true"></i></a></li>
-						   <li><a href="#"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
-						   <li><a href="#"><i className="fa fa-google-plus" aria-hidden="true"></i></a></li>				
-						</ul>
-						</li>
-					</ul>			
-					
-				<div className="clear"></div>
-		
-				
-				
-				<div className="clear"></div>
-			</div>
-			<div className="foot-bottom">
-				<p>Copyright © 2011-2017 Honey Fix Development. </p>
-			</div>
-		</div>
-	</footer>
+            <div className="col-md-offset-2 col-md-8">
+              <div className="form-group">
+                <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                <div className="validation"></div>
+              </div>
+            </div>
+
+            <div className="col-md-offset-2 col-md-8">
+              <div className="form-group">
+                <input type="text" className="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <div className="validation"></div>
+              </div>
+            </div>
+            <div className="col-md-offset-2 col-md-8">
+              <div className="form-group">
+                <textarea className="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                <div className="validation"></div>
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="col-md-offset-2 col-md-8">
+                <button type="submit" className="btn btn-theme btn-lg btn-block">Send message</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+ 
+  <section id="bottom-widget" className="home-section bg-white">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-4">
+          <div className="contact-widget wow bounceInLeft">
+            <i className="fa fa-map-marker fa-4x"></i>
+            <h5>Main Office</h5>
+            <p>
+              109 Borough High Street,<br />London SE1 1NL
+            </p>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="contact-widget wow bounceInUp">
+            <i className="fa fa-phone fa-4x"></i>
+            <h5>Call</h5>
+            <p>
+              +1 111 9998 7774<br></br> +1 245 4544 6855
+
+            </p>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="contact-widget wow bounceInRight">
+            <i className="fa fa-envelope fa-4x"></i>
+            <h5>Email us</h5>
+            <p>
+              hello@alstarstudio.com<br />sales@alstarstudio.com
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="row mar-top30">
+        <div className="col-md-12">
+          <h5>We're on social networks</h5>
+          <ul className="social-network">
+            <li><a href="#">
+						<span className="fa-stack fa-2x">
+							<i className="fa fa-circle fa-stack-2x"></i>
+							<i className="fa fa-facebook fa-stack-1x fa-inverse"></i>
+						</span></a>
+            </li>
+            <li><a href="#">
+						<span className="fa-stack fa-2x">
+							<i className="fa fa-circle fa-stack-2x"></i>
+							<i className="fa fa-dribbble fa-stack-1x fa-inverse"></i>
+						</span></a>
+            </li>
+            <li><a href="#">
+						<span className="fa-stack fa-2x">
+							<i className="fa fa-circle fa-stack-2x"></i>
+							<i className="fa fa-twitter fa-stack-1x fa-inverse"></i>
+						</span></a>
+            </li>
+            <li><a href="#">
+						<span className="fa-stack fa-2x">
+							<i className="fa fa-circle fa-stack-2x"></i>
+							<i className="fa fa-pinterest fa-stack-1x fa-inverse"></i>
+						</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  <footer>
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
+          <p>Copyright &copy; ECCS. All rights reserved.</p>
+          <div className="credits">
+          
+             
+             
+            Designed by <a href="https://www.eclick.ae/">Eclick</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" className="back-to-top"><i className="fa fa-chevron-up"></i></a>
 	</div>
     );
   }
